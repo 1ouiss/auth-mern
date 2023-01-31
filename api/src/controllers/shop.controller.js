@@ -42,13 +42,14 @@ const ShopController = {
   update: async (req, res) => {
     try {
       console.log(req.body.user);
-      if (req.body.user.toString() !== req.user._id) {
+      if (req.body.user.toString() !== req.user._id.toString()) {
         return res.status(401).json({ msg: "Not authorized" });
       }
+
       const shop = await Shop.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
       });
-      console.log(shop);
+
       res.status(200).json(shop);
     } catch (error) {
       res.status(400).json(error);

@@ -84,15 +84,20 @@ const jwt = require("jsonwebtoken");
 const UserController = {
   updateUser: async (req, res) => {
     const { firstName, lastName, password, newPassword, email } = req.body;
-    console.log(req.body);
+
+    // get firstName and lastName before update
+    const user = await User.findById(req.user._id);
+
+    const updatedFirstName = firstName || user.firstName;
+    const updatedLastName = lastName || user.lastName;
 
     if (email !== req.user.email) {
       return res.status(400).send({ error: "Email ne peut pas être modifié" });
     }
 
-    const userpw = await User.findOne({ email }).select("+password");
+    const userPassword = await User.findOne({ email }).select("+password");
 
-    const result = await bcrypt.compare(password, userpw.password);
+    const result = await bcrypt.compare(password, userPassword.password);
 
     if (!result) {
       return res.status(400).send({ error: "Invalid password" });
@@ -105,8 +110,8 @@ const UserController = {
         const user = await User.findByIdAndUpdate(
           req.user._id,
           {
-            firstName,
-            lastName,
+            firstName: updatedFirstName,
+            lastName: updatedLastName,
             password: hash,
           },
           {
@@ -136,8 +141,8 @@ const UserController = {
         const user = await User.findByIdAndUpdate(
           req.user._id,
           {
-            firstName,
-            lastName,
+            firstName: updatedFirstName,
+            lastName: updatedLastName,
           },
           {
             new: true,
