@@ -7,8 +7,8 @@ const UserInformations = () => {
   return (
     <div>
       <p>Email: {user.email}</p>
-      <p>firstname: {user.firstName}</p>
-      <p>lastname: {user.lastName}</p>
+      <p>firstName: {user.firstName}</p>
+      <p>lastName: {user.lastName}</p>
     </div>
   );
 };

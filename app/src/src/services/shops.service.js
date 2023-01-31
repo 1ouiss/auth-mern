@@ -1,10 +1,11 @@
 import axios from "axios";
+import instance from "./api.service";
 
-const API_URL = "http://localhost:8000/api/shops";
+const END_POINT = "/shops";
 
 const getAll = async () => {
   try {
-    const res = await axios.get(`${API_URL}`);
+    const res = await instance.get(`${END_POINT}`);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -12,14 +13,8 @@ const getAll = async () => {
 };
 
 const createShop = async (credentials) => {
-  const token = localStorage.getItem("accessToken");
   try {
-    const res = await axios.post(`${API_URL}`, credentials, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await instance.post(`${END_POINT}`, credentials);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -27,16 +22,37 @@ const createShop = async (credentials) => {
 };
 
 const getShopsOfUser = async () => {
-  const token = localStorage.getItem("accessToken");
   try {
-    const res = await axios.get(`${API_URL}/user`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await instance.get(`${END_POINT}/user`);
     console.log("getShopsOfUser");
     console.log(res);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const getOneShop = async (id) => {
+  try {
+    const res = await instance.get(`${END_POINT}/user/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const updateShop = async (id, credentials) => {
+  try {
+    const res = await instance.put(`${END_POINT}/${id}`, credentials);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const deleteShop = async (id) => {
+  try {
+    const res = await instance.delete(`${END_POINT}/${id}`);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -47,6 +63,9 @@ const ShopsService = {
   getAll,
   createShop,
   getShopsOfUser,
+  getOneShop,
+  updateShop,
+  deleteShop,
 };
 
 export default ShopsService;

@@ -7,14 +7,14 @@ const shopSchema = new Schema({
     required: true,
     unique: true,
   },
-  adress: {
+  address: {
     type: String,
     required: true,
   },
   description: {
     type: String,
   },
-  logo: {
+  imageUrl: {
     type: String,
   },
   user: {

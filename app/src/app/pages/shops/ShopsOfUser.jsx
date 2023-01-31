@@ -1,5 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../src/context/UserContext";
+import ShopsService from "../../../src/services/shops.service";
 import ShopsList from "../../components/shops/ShopsList";
 
 const ShopOfUser = () => {
@@ -13,6 +14,7 @@ const ShopOfUser = () => {
   const fetchShops = async () => {
     try {
       const shops = await ShopsService.getShopsOfUser();
+      console.log(shops);
       setShops(shops);
       console.log(shops);
     } catch (error) {
@@ -22,7 +24,8 @@ const ShopOfUser = () => {
 
   return (
     <div>
-      <ShopsList shops={shops} />
+      <h1>My Shops</h1>
+      <ShopsList shops={shops} user={user} />
     </div>
   );
 };

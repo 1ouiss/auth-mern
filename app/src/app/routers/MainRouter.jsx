@@ -9,6 +9,9 @@ import Account from "../pages/user/Account";
 import ProtectedRoute from "./ProtectedRoute";
 import CreateAshop from "../components/shops/CreateShopForm";
 import ChangePassword from "../pages/user/ChangePassword";
+import ShopOfUser from "../pages/shops/ShopsOfUser";
+import UpdateShop from "../components/shops/UpdateShop";
+import ShopPage from "../pages/shops/ShopPage";
 
 const MainRouter = () => {
   const { user } = useContext(UserContext);
@@ -49,12 +52,21 @@ const MainRouter = () => {
           path="/my-shops"
           element={
             <ProtectedRoute>
-              <AllShops />
+              <ShopOfUser />
             </ProtectedRoute>
           }
         />
 
+        <Route
+          path="/shops/:shopId"
+          element={
+            <ProtectedRoute>
+              <UpdateShop />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/all-shops" element={<AllShops />} />
+        <Route path="/shop/:id" element={<ShopPage />} />
       </Routes>
     </>
   );

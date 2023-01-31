@@ -21,7 +21,7 @@ const AllShops = () => {
   return (
     <div>
       <h1>All Shops :</h1>
-      <ShopsList shops={shops} />
+      <ShopsList shops={shops} user="" />
     </div>
   );
 };

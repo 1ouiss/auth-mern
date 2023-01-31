@@ -39,13 +39,13 @@ const CreateAshop = () => {
         />
         <input
           type="text"
-          name="logo"
+          name="imageUrl"
           onChange={(e) => handleChange(e)}
           placeholder="Lien du logo"
         />
         <input
           type="text"
-          name="adress"
+          name="address"
           onChange={(e) => handleChange(e)}
           placeholder="Location"
         />

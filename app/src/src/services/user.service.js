@@ -1,16 +1,11 @@
 import axios from "axios";
+import instance from "./api.service";
 
-const API_URL = "http://localhost:8000/api";
+const END_POINT = "/account";
 
 const update = async (credentials) => {
-  const token = localStorage.getItem("accessToken");
   try {
-    const res = await axios.put(`${API_URL}/account`, credentials, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await instance.put(`${END_POINT}`, credentials);
     return res.data;
   } catch (error) {
     alert("mot de passe incorrect");
